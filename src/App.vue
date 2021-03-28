@@ -1,19 +1,14 @@
 <template>
   <header></header>
   <div class="container">
-    <page-home />
+    <router-view />
   </div>
   <footer></footer>
 </template>
 
 <script>
-import PageHome from '@/components/PageHome.vue'
-
 export default {
   name: 'App',
-  components: {
-    PageHome
-  }
 }
 </script>
 
