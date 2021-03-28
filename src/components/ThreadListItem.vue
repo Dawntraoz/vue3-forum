@@ -1,7 +1,7 @@
 <template>
   <article class="thread">
     <div>
-      <a :href="`/thread/${thread.id}`">{{ thread.title }}</a>
+      <router-link :to="{ name: 'ThreadShow', params: {id: thread.id} }">{{ thread.title }}</router-link>
       <p class="text-faded text-xsmall">
         By <a href="profile.html">{{ user.name }}</a>, {{ thread.publishedAt }}.
       </p>
