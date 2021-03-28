@@ -3,7 +3,7 @@
     <div>
       <router-link :to="{ name: 'ThreadShow', params: {id: thread.id} }">{{ thread.title }}</router-link>
       <p class="text-faded text-xsmall">
-        By <a href="profile.html">{{ user.name }}</a>, {{ thread.publishedAt }}.
+        By <a href="profile.html">{{ user.name }}</a>, <app-date :timestamp="thread.publishedAt" />.
       </p>
     </div>
 
@@ -20,7 +20,7 @@
         <p class="text-xsmall">
           <a href="profile.html">{{ user.name }}</a>
         </p>
-        <p class="text-xsmall text-faded">{{ thread.publishedAt }}.</p>
+        <app-date class="text-xsmall text-faded" :timestamp="thread.publishedAt" />
       </div>
     </div>
   </article>

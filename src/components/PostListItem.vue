@@ -1,31 +1,21 @@
 <template>
-  <div class="col-large push-top">
-
-    <h1>{{ thread.title }}</h1>
-
-    <div class="post-list">
-      <div v-for="postId in thread.posts" :key="postId" class="post">
-
-        <div class="user-info">
-          <a href="#" class="user-name">{{ userById(postById(postId).userId).name }}</a>
-          <a href="#">
-            <img class="avatar-large" :src="userById(postById(postId).userId).avatar" alt="">
-          </a>
-          <p class="desktop-only text-small">107 posts</p>
-        </div>
-
-        <div class="post-content">
-          <p>
-            {{ postById(postId).text }}
-          </p>
-        </div>
-
-        <p class="post-date text-faded">
-          {{ postById(postId).publishedAt }}
-        </p>
-      </div>
+  <article class="post">
+    <div class="user-info">
+      <a href="#" class="user-name">{{ userById(post.userId).name }}</a>
+      <a href="#">
+        <img class="avatar-large" :src="userById(post.userId).avatar" alt="">
+      </a>
+      <p class="desktop-only text-small">107 posts</p>
     </div>
-  </div>
+
+    <div class="post-content">
+      <p>
+        {{ post.text }}
+      </p>
+    </div>
+
+    <app-date class="post-date text-faded" :timestamp="post.publishedAt" />
+  </article>
 </template>
 
 <script>
@@ -33,27 +23,17 @@ import sourceData from '@/data.json'
 
 export default {
   props: {
-    id: {
-      required: true,
-      type: String
+    post: {
+      type: Object,
+      required: true
     }
   },
   data () {
     return {
-      threads: sourceData.threads,
-      posts: sourceData.posts,
       users: sourceData.users
     }
   },
-  computed: {
-    thread () {
-      return this.threads.find(thread => thread.id === this.id)
-    }
-  },
   methods: {
-    postById (postId) {
-      return this.posts.find(p => p.id === postId)
-    },
     userById (userId) {
       return this.users.find(u => u.id === userId)
     }
@@ -62,10 +42,6 @@ export default {
 </script>
 
 <style scoped>
-.post-list {
-  margin-top: 20px;
-}
-
 .post {
   display: flex;
   flex-wrap: wrap;
@@ -323,9 +299,5 @@ export default {
 
 .post-content blockquote.simple .author .time {
   margin-left: 10px;
-}
-
-.post-listing-editor {
-  flex: 1 1 83%;
 }
 </style>
